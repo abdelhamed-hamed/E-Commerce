@@ -62,6 +62,40 @@ class AuthValidation {
       }),
     validatorMiddleware,
   ];
+
+  forgetPassword = [
+    body("email")
+      .notEmpty()
+      .withMessage((val, { req }) => req.__("required"))
+      .isEmail()
+      .withMessage((val, { req }) => req.__("invalid-email")),
+    validatorMiddleware,
+  ];
+
+  verifyCode = [
+    body("resetCode")
+      .notEmpty()
+      .withMessage((val, { req }) => req.__("required")),
+    validatorMiddleware,
+  ];
+
+  resetPassword = [
+    body("password")
+      .notEmpty()
+      .withMessage((val, { req }) => req.__("required"))
+      .isLength({ min: 6, max: 20 })
+      .withMessage((val, { req }) => req.__("invalid-password")),
+
+    body("confirmPassword")
+      .notEmpty()
+      .withMessage((val, { req }) => req.__("required"))
+      .custom((val, { req }) => {
+        if (val !== req.body.password)
+          throw new Error(`${req.__("password-typical")}`);
+        return true;
+      }),
+    validatorMiddleware,
+  ];
 }
 
 const authValidation = new AuthValidation();

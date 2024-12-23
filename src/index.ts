@@ -9,6 +9,9 @@ import usersRoute from "./users/users.route";
 import authRoute from "./auth/auth.route";
 import { Users } from "./users/users.interface";
 import profileRoute from "./profile/profile.route";
+import googleRoute from "./google/google.route";
+import wishlistRoute from "./wishlist/wishlist.route";
+import addressRoute from "./address/address.route";
 
 // Edit Express Request
 declare module "express" {
@@ -20,12 +23,15 @@ declare module "express" {
 }
 
 const mainRoutes = (app: express.Application) => {
+  app.use("/auth/google", googleRoute);
   app.use("/api/v1/categories", categoriesRouter);
   app.use("/api/v1/subcategories", subcategoriesRouter);
   app.use("/api/v1/products", productsRoute);
   app.use("/api/v1/users", usersRoute);
   app.use("/api/v1/auth", authRoute);
   app.use("/api/v1/profile", profileRoute);
+  app.use("/api/v1/wishlist", wishlistRoute);
+  app.use("/api/v1/address", addressRoute);
 
   //  Handle Routes Error
   app.all(

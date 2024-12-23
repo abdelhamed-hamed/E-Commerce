@@ -1,4 +1,6 @@
-import { Document } from "mongoose";
+import { Document, Schema } from "mongoose";
+import { Products } from "../products/products.interface";
+
 export interface Users extends Document {
   readonly username: string;
   readonly email: string;
@@ -7,7 +9,9 @@ export interface Users extends Document {
   confirmPassword: string;
   readonly role: Role;
   readonly active: boolean;
-  readonly googleId: string; // ال اي دي لو مسجل جوجل
+  wishlist: Products[];
+  address: Adress[];
+  googleId: string; // ال اي دي لو مسجل جوجل
   hasPassword: boolean; // لأنه لو مسجل بي جوجل مبيكونش ليه باسوورد دي بتعمل النقطه دي
   passwordChangedAt: Date | number;
   passwordResetCode: string | undefined;
@@ -17,3 +21,10 @@ export interface Users extends Document {
 }
 
 type Role = "user" | "admin" | "employee";
+
+type Adress = {
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+};

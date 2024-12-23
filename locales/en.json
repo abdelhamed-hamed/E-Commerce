@@ -24,5 +24,9 @@
   "new-password-typically-old": "Enter a different password than the old password",
   "please-login": "please login",
   "account-activate": "your account isn't active",
-  "account-permission": "you don't have permission to do this action"
+  "account-permission": "you don't have permission to do this action",
+
+  "_________________________________________________________": "Server",
+
+  "server": "Unexpected Error Please Try Again"
 }

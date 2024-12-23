@@ -4,7 +4,7 @@ import sharp from "sharp";
 import subcategoriesSchema from "./subcategories.schema";
 import { SubCategories } from "./subcategories.interface";
 import crudService from "../shared/crud.service";
-import expressAsyncHandler from "express-async-handler";
+
 class SubCategoriesService {
   setCategoryId(req: Request, res: Response, next: NextFunction) {
     if (req.params.categoryId && !req.body.category)

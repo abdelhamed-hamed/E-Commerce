@@ -16,6 +16,8 @@ const usersSchema = new mongoose.Schema<Users>(
       default: "user",
     },
     active: { type: Boolean, default: true },
+    wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "products" }],
+    address: [{ street: String, city: String, state: String, zip: String }],
     googleId: String, // ال اي دي لو مسجل جوجل
     hasPassword: { type: Boolean, default: true }, // لأنه لو مسجل بي جوجل مبيكونش ليه باسوورد دي بتعمل النقطه دي
     passwordChangedAt: Date,
@@ -36,6 +38,7 @@ const imageUrl = (document: Users): any => {
 
 // hash password before
 usersSchema.pre<Users>("save", async function (next) {
+  if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 13);
   next();
 });
