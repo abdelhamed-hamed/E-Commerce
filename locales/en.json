@@ -28,5 +28,10 @@
 
   "_________________________________________________________": "Server",
 
-  "server": "Unexpected Error Please Try Again"
+  "server": "Unexpected Error Please Try Again",
+
+  "_______________________________________________________": "Reviews",
+
+  "minmax": "reviews shoild be betwen 1 and 5",
+  "comment": "should be less than 155 letter"
 }
