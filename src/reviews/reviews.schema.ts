@@ -6,6 +6,7 @@ const reviewsSchema = new mongoose.Schema<Reviews>(
     comment: String,
     user: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
     product: { type: mongoose.Schema.Types.ObjectId, ref: "products" },
+    rate: Number,
   },
   { timestamps: true }
 );

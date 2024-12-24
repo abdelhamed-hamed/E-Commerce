@@ -1,16 +1,14 @@
 import { Router } from "express";
 import ProductsService from "./products.service";
 import productsValidation from "./products.validation";
-import multer from "multer";
 import productsService from "./products.service";
 import { uploadMultiFiles } from "../middlewares/uploadsFiles.middleware";
 import authService from "../auth/auth.service";
+import reviewsRoute from "../reviews/reviews.route";
 const productsRouter: Router = Router();
 
-const storage = multer.memoryStorage();
-const upload = multer({
-  storage: storage,
-});
+productsRouter.use("/:productId/reviews", reviewsRoute);
+
 productsRouter
   .route("/")
   .get(ProductsService.getAll)
