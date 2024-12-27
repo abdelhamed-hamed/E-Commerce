@@ -14,6 +14,6 @@ wishlistRoute
 wishlistRoute.delete(
   "/:productId",
   wishlistValidation.deleteFromWishlist,
-  wishListService.deleteFromWithList
+  wishListService.deleteFromWithList 
 );
 export default wishlistRoute;

@@ -5,6 +5,7 @@ import productsService from "./products.service";
 import { uploadMultiFiles } from "../middlewares/uploadsFiles.middleware";
 import authService from "../auth/auth.service";
 import reviewsRoute from "../reviews/reviews.route";
+
 const productsRouter: Router = Router();
 
 productsRouter.use("/:productId/reviews", reviewsRoute);

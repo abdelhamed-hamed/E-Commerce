@@ -10,7 +10,7 @@ class ProductsService {
   // Get all Products from the database
   getAll = crudService.getAll<Products>(productsSchema, "products");
   // Get One Product
-  getOne = crudService.getOne<Products>(productsSchema);
+  getOne = crudService.getOne<Products>(productsSchema, "products", "reviews");
 
   // Create a new Product
   create = crudService.create<Products>(productsSchema);

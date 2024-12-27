@@ -13,6 +13,7 @@ import googleRoute from "./google/google.route";
 import wishlistRoute from "./wishlist/wishlist.route";
 import addressRoute from "./address/address.route";
 import reviewsRoute from "./reviews/reviews.route";
+import copounsRoute from "./copouns/copouns.route";
 
 // Edit Express Request
 declare module "express" {
@@ -34,6 +35,7 @@ const mainRoutes = (app: express.Application) => {
   app.use("/api/v1/wishlist", wishlistRoute);
   app.use("/api/v1/address", addressRoute);
   app.use("/api/v1/reviews", reviewsRoute);
+  app.use("/api/v1/copouns", copounsRoute);
 
   //  Handle Routes Error
   app.all(

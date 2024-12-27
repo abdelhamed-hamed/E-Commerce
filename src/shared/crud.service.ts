@@ -44,11 +44,19 @@ class CrudService {
 
   // Get One
   // فايدة الموديل نيم عشان خاطر لو عامل يوزر  في ال جيت ميرجعوش بالداتا الحساسه واعمله سنتيزيشن الاول
-  getOne = <T>(scheme: mongoose.Model<any>, modelName?: string) =>
+  getOne = <T>(
+    scheme: mongoose.Model<any>,
+    modelName?: string,
+    populationOption?: string
+  ) =>
     expressAsyncHandler(
       async (req: Request, res: Response, next: NextFunction) => {
-        // request from the database
-        let document: any = await scheme.findById(req.params.id);
+        // دا متغير بعمل كل ال عايزها
+        let query = scheme.findById(req.params.id);
+        // لو في اي قيمة خلي ال كيري يتعمل عليها بوبيوليت الاول
+        if (populationOption) query = query.populate(populationOption);
+        // بساوي قيمتها بقيمة الحاجه ال عملت العمليات عليها
+        let document: any = await query;
         if (!document) return next(new ApiErrors(req.__("not-found"), 404));
 
         // هنا بقوله لو ال جايلك حاجه بروفايل اعملي سنتيزيشن للداتا
