@@ -4,12 +4,14 @@ import sharp from "sharp";
 import subcategoriesSchema from "./subcategories.schema";
 import { SubCategories } from "./subcategories.interface";
 import crudService from "../shared/crud.service";
+
 class SubCategoriesService {
   setCategoryId(req: Request, res: Response, next: NextFunction) {
     if (req.params.categoryId && !req.body.category)
       req.body.category = req.params.categoryId;
     next();
   }
+
   filterSubcategories(req: Request, res: Response, next: NextFunction) {
     const filterData: any = {};
     if (req.params.categoryId) filterData.category = req.params.categoryId;
@@ -37,11 +39,12 @@ class SubCategoriesService {
       const file = req.file;
       const fileName = `subcategory-${Date.now()}-${
         file.originalname.split(".")[0]
-      }`;
-      sharp(file.buffer)
+      }.webp`;
+
+      await sharp(file.buffer)
         .webp({ quality: 90 })
         .resize({ width: 500, height: 500 })
-        .toFile(`src/uploads/images/subcategories/${fileName}.webp`);
+        .toFile(`src/uploads/images/subcategories/${fileName}`);
       req.body.image = fileName;
     }
     next();

@@ -1,8 +1,10 @@
 import { Router } from "express";
 import categoriesService from "./categories.service";
-import subcategoriesRouter from "../subcategories/subcategories.route";
 import categoryValidation from "./categories.validation";
 import { uploadSingleFile } from "../middlewares/uploadsFiles.middleware";
+import authService from "../auth/auth.service";
+import subcategoriesRouter from "../subcategories/subcategories.route";
+import productsRouter from "../products/products.route";
 
 const categoriesRouter: Router = Router();
 
@@ -13,6 +15,9 @@ categoriesRouter
   .route("/")
   .get(categoriesService.getAll)
   .post(
+    authService.protectedRoute,
+    authService.checkActive,
+    authService.allowedTo("admin", "employee"),
     uploadSingleFile(["image"], "image"),
     categoriesService.saveImage,
     categoryValidation.creat,
@@ -23,11 +28,20 @@ categoriesRouter
   .route("/:id")
   .get(categoryValidation.getOne, categoriesService.getOne)
   .put(
+    authService.protectedRoute,
+    authService.checkActive,
+    authService.allowedTo("admin", "employee"),
     uploadSingleFile(["image"], "image"),
     categoriesService.saveImage,
     categoryValidation.update,
     categoriesService.update
   )
-  .delete(categoryValidation.delete, categoriesService.delete);
+  .delete(
+    authService.protectedRoute,
+    authService.checkActive,
+    authService.allowedTo("admin", "employee"),
+    categoryValidation.delete,
+    categoriesService.delete
+  );
 
 export default categoriesRouter;
