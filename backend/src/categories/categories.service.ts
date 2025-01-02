@@ -26,11 +26,12 @@ class CategoriesService {
       const file = req.file;
       const fileName = `category-${Date.now()}-${
         file.originalname.split(".")[0]
-      }`;
-      sharp(file.buffer)
+      }.webp`;
+
+      await sharp(file.buffer)
         .webp({ quality: 90 })
         .resize({ width: 500, height: 500 })
-        .toFile(`src/uploads/images/categories/${fileName}.webp`);
+        .toFile(`src/uploads/images/categories/${fileName}`);
       req.body.image = fileName;
     }
     next();

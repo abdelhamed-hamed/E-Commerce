@@ -19,6 +19,15 @@ const subCategoriesSchema = new mongoose.Schema<SubCategories>(
   { timestamps: true }
 );
 
+// Add Base url To Image  Before Name
+const imageUrl = (document: SubCategories): any => {
+  if (document.image)
+    document.image = `${process.env.BASE_URL}/images/subcategories/${document.image}`;
+};
+
+// Constant Code
+subCategoriesSchema.post("init", imageUrl).post("save", imageUrl);
+
 // replace id of category to data
 subCategoriesSchema.pre<SubCategories>(/^find/, function (next) {
   this.populate({ path: "category" });

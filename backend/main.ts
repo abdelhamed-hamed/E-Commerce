@@ -1,4 +1,6 @@
 import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import dbConnection from "./src/config/database";
 import mainRoutes from "./src";
@@ -9,6 +11,17 @@ import { Server } from "http";
 
 const app: express.Application = express();
 app.use(express.json({ limit: "5kb" }));
+
+app.use(
+  cors({
+    origin: ["http://localhost:4200"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
+app.use(cookieParser());
+app.use(express.static("src/uploads"));
 let server: Server;
 
 dotenv.config();

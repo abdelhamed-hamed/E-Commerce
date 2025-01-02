@@ -4,11 +4,47 @@
   "not-found": "Data not-found",
   "duplicated": "Data is already founded",
   "sm-length": "name should be between 2 and 15 letter",
+  "md-length": "name should be between 2 and 50 letter",
   "lg-length": "name should be between 2 and 300 letter",
   "update-product-subcategory-error": "subcategory doesn't exist in this category",
   "price": "price should be number and more than 0",
   "quantity": "quantity should be number and more than 0",
   "discount": "discount should be number and more than 0",
   "invalid": "invalid value",
-  "file-type": "the file type is not allowed"
+  "file-type": "the file type is not allowed",
+
+  "________________________________________________________": "Auth",
+  "invalid-email-password": "uncorrect email or password",
+  "duplicated-user": "username or email is already used by another person",
+  "invalid-email": "uncorrect email",
+  "invalid-user": "user not-found",
+  "invalid-password": "password should be between 6 and 20 char",
+  "password-typical": "confirmpassword doesn't match password",
+  "new-password": "enter a new password",
+  "old-password": "old password isn't correct",
+  "new-password-typically-old": "Enter a different password than the old password",
+  "please-login": "please login",
+  "account-activate": "your account isn't active",
+  "account-permission": "you don't have permission to do this action",
+
+  "_________________________________________________________": "Server",
+
+  "server": "Unexpected Error Please Try Again",
+
+  "_______________________________________________________": "Reviews",
+
+  "minmax": "reviews should be between 1 and 5",
+  "comment": "should be less than 155 letter",
+  "cannot-creat": "you created review before",
+  "cannot-update": "you cannot update this review",
+  "cannot-delete": "you cannot delete this review",
+
+  "______________________________________________________": "discount",
+
+  "minmax-discount": "discount should be between percent 1 and 100",
+
+  "_____________________________________________________": "cart",
+
+  "empty": "there isnont a cart for this user",
+  "quantity-product": "quantity should be more than 0 and less than 100"
 }
