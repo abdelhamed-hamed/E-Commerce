@@ -8,6 +8,9 @@ import path from "path";
 import hpp from "hpp";
 import i18n from "i18n";
 import { Server } from "http";
+import compression from "compression";
+import ExpressMongoSanitize from "express-mongo-sanitize";
+import helmet from "helmet";
 
 const app: express.Application = express();
 app.use(express.json({ limit: "5kb" }));
@@ -15,11 +18,14 @@ app.use(express.json({ limit: "5kb" }));
 app.use(
   cors({
     origin: ["http://localhost:4200"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-CSRF-TOKEN"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
+app.use(ExpressMongoSanitize());
+app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
+app.use(compression());
 app.use(cookieParser());
 app.use(express.static("src/uploads"));
 let server: Server;

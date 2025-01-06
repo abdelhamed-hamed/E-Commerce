@@ -13,6 +13,7 @@
   "description": "",
   "dependencies": {
     "@types/express-validator": "^3.0.2",
+    "@types/helmet": "^4.0.0",
     "@types/mongoose": "^5.11.97",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
@@ -21,6 +22,7 @@
     "express": "^4.21.1",
     "express-async-handler": "^1.2.0",
     "express-validator": "^7.2.0",
+    "helmet": "^8.0.0",
     "hpp": "^0.2.3",
     "i18n": "^0.15.1",
     "jsonwebtoken": "^9.0.2",
@@ -35,9 +37,12 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
+    "@types/compression": "^1.7.5",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
+    "@types/csurf": "^1.11.5",
     "@types/express": "^5.0.0",
+    "@types/express-mongo-sanitize": "^2.1.2",
     "@types/hpp": "^0.2.6",
     "@types/i18n": "^0.13.12",
     "@types/jsonwebtoken": "^9.0.7",
@@ -45,6 +50,9 @@
     "@types/nodemailer": "^6.4.17",
     "@types/passport": "^1.0.0",
     "@types/passport-google-oauth20": "^2.0.16",
+    "compression": "^1.7.5",
+    "csurf": "^1.11.0",
+    "express-mongo-sanitize": "^2.2.0",
     "nodemon": "^3.1.7",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.2"

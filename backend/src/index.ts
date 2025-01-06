@@ -16,6 +16,8 @@ import addressRoute from "./address/address.route";
 import reviewsRoute from "./reviews/reviews.route";
 import copounsRoute from "./copouns/copouns.route";
 import cartsRouter from "./cart/carts.route";
+import ordersRouter from "./orders/orders.route";
+import csurf from "csurf";
 
 // Edit Express Request
 declare module "express" {
@@ -28,6 +30,28 @@ declare module "express" {
 
 const mainRoutes = (app: express.Application) => {
   app.use("/auth/google", googleRoute);
+
+  // انا حطيته تحت جوجل عشان خاطر بحطه تحت الحاجات ال بتعمل ريدايركت خارج المتصفح زي جوجل وغيره
+  app.use(
+    csurf({
+      cookie: {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+      },
+    })
+  );
+
+  app.use(
+    (
+      req: express.Request,
+      res: express.Response,
+      next: express.NextFunction
+    ) => {
+      res.cookie("cookies", req.csrfToken());
+      next();
+    }
+  );
   app.use("/api/v1/categories", categoriesRouter);
   app.use("/api/v1/subcategories", subcategoriesRouter);
   app.use("/api/v1/products", productsRoute);
@@ -39,6 +63,7 @@ const mainRoutes = (app: express.Application) => {
   app.use("/api/v1/reviews", reviewsRoute);
   app.use("/api/v1/copouns", copounsRoute);
   app.use("/api/v1/carts", cartsRouter);
+  app.use("/api/v1/orders", ordersRouter);
 
   //  Handle Routes Error
   app.all(

@@ -29,6 +29,8 @@ class CartsService {
 
       if (!cart) return next(new ApiErrors(req.__("empty"), 404));
 
+      this.calcTotalPrice(cart);
+
       res.status(204).json({});
     }
   );
@@ -100,16 +102,18 @@ class CartsService {
       const cart = await cartsSchema.findOneAndUpdate(
         { user: req.user!._id },
         // عملت ال بول عشان خاطر لو لفته موجود تحذفه لو ملقتش تعتبره مش موجود
-        {
-          // استعملت ال اي دي عشان زي متفقنا لو لقيت لو عملت اوبجكت جوا ارراي بتعمل لكل اوبجكت اي دي مميز
-          // بعتهولو في ال بارام عشان اتفقنا بدل ابديت فببعت في ال بارمز
-          $pull: { items: { _id: req.params.itemId } },
-        }
+
+        // استعملت ال اي دي عشان زي متفقنا لو لقيت لو عملت اوبجكت جوا ارراي بتعمل لكل اوبجكت اي دي مميز
+        // بعتهولو في ال بارام عشان اتفقنا بدل ابديت فببعت في ال بارمز
+        { $pull: { items: { _id: req.params.itemId } } },
+
+        { new: true }
       );
 
       if (!cart) return next(new ApiErrors(req.__("not-found"), 404));
 
       this.calcTotalPrice(cart);
+
       await cart.save();
 
       res.status(200).json({ length: cart?.items.length, data: cart });
